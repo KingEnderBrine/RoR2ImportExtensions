@@ -85,7 +85,7 @@ namespace RiskOfThunder.RoR2Importer
             }
         }
 
-        private const string THUNDERSTORE_ADDRESS = "https://thunderstore.io";
+        private const string THUNDERSTORE_ADDRESS = "https://thunderstore.io/c/riskofrain2";
         private const string AUTHOR_NAME = "RiskofThunder";
         private const string SUBMODULE_STARTING_WORDS = "R2API";
         private const string TRANSIENT_STORE_NAME = "transient-store";
@@ -317,14 +317,17 @@ namespace RiskOfThunder.RoR2Importer
         public override void Cleanup()
         {
             base.Cleanup();
+
             if (AssetDatabase.AssetPathToGUID(Constants.Paths.OldMMHookPath) != string.Empty)
             {
                 FileUtil.DeleteFileOrDirectory(Constants.Paths.OldMMHookPath);
+                FileUtil.DeleteFileOrDirectory($"{Constants.Paths.OldMMHookPath}.meta");
             }
 
-            if (AssetDatabase.AssetPathToGUID("Packages/riskofthunder-r2api_animations/plugins/R2API.Animations/AssetsTools.NET.dll") != string.Empty)
+            if (AssetDatabase.AssetPathToGUID(Constants.Paths.R2API_ANIMS_ASSET_TOOLS_PATH) != string.Empty)
             {
-                FileUtil.DeleteFileOrDirectory("Packages/riskofthunder-r2api_animations/plugins/R2API.Animations/AssetsTools.NET.dll");
+                FileUtil.DeleteFileOrDirectory(Constants.Paths.R2API_ANIMS_ASSET_TOOLS_PATH);
+                FileUtil.DeleteFileOrDirectory($"{Constants.Paths.R2API_ANIMS_ASSET_TOOLS_PATH}.meta");
             }
 
             if (transientStore)
